@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}글 조회{% endblock %}
+
+
+{% block content %}
+<div class="card border-1 border-primary border-rounded">
+    <div class="card-body">
+        <h6>작성자 : {{ question.author.nickname }}</h6>
+        <h6>작성시각 : {{ question.created_at | date:'Y.m.d H:i'}}</h6>
+        {% if user.username == question.author.username %}
+            <a href="{% url 'blog:modify' question.pk %}" class="btn btn-sm btn-primary">글수정</a>
+        {% endif %}
+    </div>
+</div>
+
+
+<h1>{{ question.subject }}</h1>
+<hr>
+
+<textarea class="form-control" name="content" id="content" rows="20" style="resize: none;" disabled>{{ question.content | default_if_none:'' | escape }}</textarea>
+
+
+{% endblock %}

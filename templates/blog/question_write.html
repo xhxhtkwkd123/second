@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}글작성{% endblock %}
+
+
+{% block content %}
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% include 'errors.html' %}
+    <label for="subject" class="form-label">제목</label>
+    <input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.value | default_if_none:'' }}">
+    <br>
+    <textarea class="form-control" name="content" id="content" rows="20" style="resize: none;">{{ form.content.value | default_if_none:'' | escape }}</textarea>
+    <input type="submit" class="btn btn-sm btn-primary mt-2" value="글등록">
+</form>
+
+
+{% endblock %}

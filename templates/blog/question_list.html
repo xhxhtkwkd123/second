@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}메인화면{% endblock %}
+
+
+{% block content %}
+
+
+{% if question_list %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>시각</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for question in question_list %}
+        <tr>
+            <td><a href="{{ question.get_absolute_url }}">{{ question.subject | truncatechars:20 }}</a></td>
+            <td>{{ question.author.nickname }}</td>
+            <td>{{ question.created_at | date:"Y.m.d"}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+    <h1>No question</h1>
+{% endif %}
+
+{% endblock %}

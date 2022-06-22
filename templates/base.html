@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    </head>
+    <body>
+        <div class="contain">
+            <div class="row">
+                <div class="col-sm-3">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <div class="container">
+                        <div class="row">
+                            <!--크기 조절용-->
+                            <div class="col-sm-2 mt-3"></div>
+
+                            <!--메뉴-->
+                            <div class="col-sm-8">
+                                <div class="border-bottom border-1 mb-3 pb-1 border-primary">
+                                    <a href="{% url 'blog:index' %}" class="btn btn-sm btn-primary">홈으로</a>
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'common:logout' %}" class="btn btn-sm btn-primary">[{{ user.nickname }}]로그아웃</a>
+                                        <a href="{% url 'blog:write' %}" class="btn btn-sm btn-primary">글작성</a>
+                                    {% else %}
+                                        <a href="{% url 'common:login' %}" class="btn btn-sm btn-primary">로그인</a> 또는
+                                        <a href="{% url 'common:signup' %}" class="btn btn-sm btn-primary">회원가입</a>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            <!--크기 조절용-->
+                            <div class="col-sm-2 mt-3"></div>
+                        </div>
+
+
+                        <div class="row">
+                            <!--크기 조절용-->
+                            <div class="col-sm-2 mt-3"></div>
+                            <!--컨텐츠-->
+                            <div class="col-sm-8">
+                                {% block content %}
+                                {% endblock %}
+                            </div>
+                            <!--크기 조절용-->
+                            <div class="col-sm-2 mt-3"></div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+
+                <div class="col-sm-3">
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
